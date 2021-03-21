@@ -1,23 +1,29 @@
 package com.company;
 
-import com.company.observer.GetTheStock;
-import com.company.observer.StockGrabber;
-import com.company.observer.StockObserver;
+import com.company.factory.EnemyShip;
+import com.company.factory.EnemyShipFactory;
+
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        StockGrabber stockGrabber = new StockGrabber();
+        EnemyShipFactory shipFactory = new EnemyShipFactory();
+        EnemyShip theEnemy = null;
+        Scanner scanner = new Scanner(System.in);
 
-        StockObserver observer1 = new StockObserver(stockGrabber);
-        StockObserver observer2 = new StockObserver(stockGrabber);
+        if (scanner.hasNextLine()) {
+            theEnemy = shipFactory.makeEnemyShip(scanner.nextLine());
+        }
 
-        Runnable getIBM = new GetTheStock(stockGrabber, 2, "IBM", 197.00);
-        Runnable getApple = new GetTheStock(stockGrabber, 2, "Apple", 677.60);
-        Runnable getGoogle = new GetTheStock(stockGrabber, 2, "Google", 676.40);
+        if (theEnemy != null) {
+            doStuffEnemy(theEnemy);
+        }
+    }
 
-        new Thread(getIBM).start();
-        new Thread(getApple).start();
-        new Thread(getGoogle).start();
+    private static void doStuffEnemy(EnemyShip anEnemyShip) {
+        anEnemyShip.displayEnemyShip();
+        anEnemyShip.followHeroShip();
+        anEnemyShip.enemyShipShoots();
     }
 }

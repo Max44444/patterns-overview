@@ -1,15 +1,23 @@
 package com.company;
 
-
-import com.company.singleton.GetTheTiles;
+import com.company.builder.OldRobotBuilder;
+import com.company.builder.Robot;
+import com.company.builder.RobotBuilder;
+import com.company.builder.RobotEngineer;
 
 public class Main {
 
     public static void main(String[] args) {
-        Runnable getTiles = new GetTheTiles();
-        Runnable getTilesAgain = new GetTheTiles();
+        RobotBuilder oldStyleRobot = new OldRobotBuilder();
 
-        new Thread(getTiles).start();
-        new Thread(getTilesAgain).start();
+        RobotEngineer robotEngineer = new RobotEngineer(oldStyleRobot);
+
+        robotEngineer.makeRobot();
+
+        Robot firstRobot = robotEngineer.getRobot();
+
+        System.out.println("Robot Built");
+        System.out.println(firstRobot);
     }
+
 }

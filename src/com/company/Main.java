@@ -1,20 +1,16 @@
 package com.company;
 
-import com.company.prototype.CloneFactory;
-import com.company.prototype.Sheep;
+import com.company.decorator.Mozzarella;
+import com.company.decorator.Pizza;
+import com.company.decorator.PlainPizza;
+import com.company.decorator.TomatoSauce;
 
 public class Main {
 
     public static void main(String[] args) {
-        CloneFactory animalMaker = new CloneFactory();
-        Sheep sheep = new Sheep();
+        Pizza basicPizza = new TomatoSauce(new Mozzarella(new PlainPizza()));
 
-        Sheep clonedSheep = (Sheep) animalMaker.getClone(sheep);
-
-        System.out.println(sheep);
-        System.out.println(clonedSheep);
-        System.out.println("sheep hashcode: " + System.identityHashCode(sheep));
-        System.out.println("clone hashcode: " + System.identityHashCode(clonedSheep));
+        System.out.println("Ingredients: " + basicPizza.getDescription());
     }
 
 }

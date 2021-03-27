@@ -1,16 +1,21 @@
 package com.company;
 
-import com.company.decorator.Mozzarella;
-import com.company.decorator.Pizza;
-import com.company.decorator.PlainPizza;
-import com.company.decorator.TomatoSauce;
+import com.company.command.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        Pizza basicPizza = new TomatoSauce(new Mozzarella(new PlainPizza()));
+        ElectronicDevice newDevice = TVRemote.getDevice();
 
-        System.out.println("Ingredients: " + basicPizza.getDescription());
+        DeviceButton onPressed = new DeviceButton(new TurnTVOn(newDevice));
+        DeviceButton offPressed = new DeviceButton(new TurnTVOff(newDevice));
+        DeviceButton volumeUpPressed = new DeviceButton(new TurnTVVolumeUp(newDevice));
+        DeviceButton volumeDownPressed = new DeviceButton(new TurnTVVolumeDown(newDevice));
+
+        onPressed.press();
+        volumeUpPressed.press();
+        volumeDownPressed.press();
+        offPressed.press();
     }
 
 }

@@ -1,21 +1,29 @@
 package com.company;
 
-import com.company.command.*;
+
+import com.company.adapter.EnemyAttacker;
+import com.company.adapter.EnemyRobot;
+import com.company.adapter.EnemyRobotAdapter;
+import com.company.adapter.EnemyTank;
 
 public class Main {
 
     public static void main(String[] args) {
-        ElectronicDevice newDevice = TVRemote.getDevice();
+        EnemyAttacker enemyTank = new EnemyTank();
 
-        DeviceButton onPressed = new DeviceButton(new TurnTVOn(newDevice));
-        DeviceButton offPressed = new DeviceButton(new TurnTVOff(newDevice));
-        DeviceButton volumeUpPressed = new DeviceButton(new TurnTVVolumeUp(newDevice));
-        DeviceButton volumeDownPressed = new DeviceButton(new TurnTVVolumeDown(newDevice));
+        EnemyRobot enemyRobot = new EnemyRobot();
 
-        onPressed.press();
-        volumeUpPressed.press();
-        volumeDownPressed.press();
-        offPressed.press();
+        EnemyAttacker enemyAttacker = new EnemyRobotAdapter(enemyRobot);
+
+        System.out.println("The tank");
+        attack(enemyTank);
+
+        System.out.println("The robot");
+        attack(enemyAttacker);
+    }
+
+    public static void attack(EnemyAttacker enemyAttacker) {
+        enemyAttacker.fireWeapon();
     }
 
 }

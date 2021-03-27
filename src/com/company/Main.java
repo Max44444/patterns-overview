@@ -1,29 +1,14 @@
 package com.company;
 
-
-import com.company.adapter.EnemyAttacker;
-import com.company.adapter.EnemyRobot;
-import com.company.adapter.EnemyRobotAdapter;
-import com.company.adapter.EnemyTank;
+import com.company.facade.BankAccountFacade;
 
 public class Main {
 
     public static void main(String[] args) {
-        EnemyAttacker enemyTank = new EnemyTank();
-
-        EnemyRobot enemyRobot = new EnemyRobot();
-
-        EnemyAttacker enemyAttacker = new EnemyRobotAdapter(enemyRobot);
-
-        System.out.println("The tank");
-        attack(enemyTank);
-
-        System.out.println("The robot");
-        attack(enemyAttacker);
-    }
-
-    public static void attack(EnemyAttacker enemyAttacker) {
-        enemyAttacker.fireWeapon();
+        BankAccountFacade accessingBank = new BankAccountFacade(12345678, 1234);
+        accessingBank.withdrawCash(50.00);
+        accessingBank.withdrawCash(900.00);
+        accessingBank.depositCash(200.00);
     }
 
 }

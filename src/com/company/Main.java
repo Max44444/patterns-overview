@@ -1,23 +1,20 @@
 package com.company;
 
-import com.company.builder.OldRobotBuilder;
-import com.company.builder.Robot;
-import com.company.builder.RobotBuilder;
-import com.company.builder.RobotEngineer;
+import com.company.prototype.CloneFactory;
+import com.company.prototype.Sheep;
 
 public class Main {
 
     public static void main(String[] args) {
-        RobotBuilder oldStyleRobot = new OldRobotBuilder();
+        CloneFactory animalMaker = new CloneFactory();
+        Sheep sheep = new Sheep();
 
-        RobotEngineer robotEngineer = new RobotEngineer(oldStyleRobot);
+        Sheep clonedSheep = (Sheep) animalMaker.getClone(sheep);
 
-        robotEngineer.makeRobot();
-
-        Robot firstRobot = robotEngineer.getRobot();
-
-        System.out.println("Robot Built");
-        System.out.println(firstRobot);
+        System.out.println(sheep);
+        System.out.println(clonedSheep);
+        System.out.println("sheep hashcode: " + System.identityHashCode(sheep));
+        System.out.println("clone hashcode: " + System.identityHashCode(clonedSheep));
     }
 
 }

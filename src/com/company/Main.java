@@ -1,23 +1,39 @@
 package com.company;
 
-import com.company.templatemethod.Hoagie;
-import com.company.templatemethod.ItalianHoagie;
-import com.company.templatemethod.VeggieHoagie;
+import com.company.composite.DiscJockey;
+import com.company.composite.Song;
+import com.company.composite.SongComponent;
+import com.company.composite.SongGroup;
 
 public class Main {
 
     public static void main(String[] args) {
+        SongComponent industrialMusic = new SongGroup("Industrial",
+            "is a style of experimental music that draws on transgressive and provocative themes");
+        SongComponent heavyMetalMusic = new SongGroup("Heavy Metal",
+            "is a genre of rock that developed in the late 1960s, largely in the UK and in the US");
+        SongComponent dubStepMusic = new SongGroup("Dub Step",
+            "is a genre of electronic dance music that originated in South London, England");
 
-        Hoagie cust12Hoagie = new ItalianHoagie();
+        SongComponent everySong = new SongGroup("Song List", "Every Song Available");
 
-        cust12Hoagie.makeSandwich();
+        everySong.add(industrialMusic);
 
-        System.out.println("\n");
+        industrialMusic.add(new Song("Head Like a Hole", "NIN", 1990));
+        industrialMusic.add(new Song("Headhunter", "Front 242", 1988));
 
-        Hoagie cust13Hoagie = new VeggieHoagie();
+        industrialMusic.add(dubStepMusic);
 
-        cust13Hoagie.makeSandwich();
+        dubStepMusic.add(new Song("Centipede", "Knife Party", 2012));
+        dubStepMusic.add(new Song("Tetris", "Doctor P", 2011));
 
+        everySong.add(heavyMetalMusic);
+
+        heavyMetalMusic.add(new Song("War Pigs", "Black Sabath", 1970));
+        heavyMetalMusic.add(new Song("Ace of Spades", "Motorhead", 1980));
+
+        DiscJockey crazyLarry = new DiscJockey(everySong);
+        crazyLarry.getSongList();
     }
 
 }
